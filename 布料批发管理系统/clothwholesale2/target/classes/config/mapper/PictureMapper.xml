@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.PictureMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.Picture" >
+    <id column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="pictureIndex" property="pictureIndex" jdbcType="SMALLINT" />
+    <result column="modelCode" property="modelCode" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    filename, pictureIndex, modelCode
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.PictureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from picture
+    where filename = #{filename,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from picture
+    where filename = #{filename,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.PictureExample" >
+    delete from picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.Picture" >
+    insert into picture (filename, pictureIndex, modelCode
+      )
+    values (#{filename,jdbcType=VARCHAR}, #{pictureIndex,jdbcType=SMALLINT}, #{modelCode,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.Picture" >
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="pictureIndex != null" >
+        pictureIndex,
+      </if>
+      <if test="modelCode != null" >
+        modelCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureIndex != null" >
+        #{pictureIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.PictureExample" resultType="java.lang.Integer" >
+    select count(*) from picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update picture
+    <set >
+      <if test="record.filename != null" >
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureIndex != null" >
+        pictureIndex = #{record.pictureIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="record.modelCode != null" >
+        modelCode = #{record.modelCode,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update picture
+    set filename = #{record.filename,jdbcType=VARCHAR},
+      pictureIndex = #{record.pictureIndex,jdbcType=SMALLINT},
+      modelCode = #{record.modelCode,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.Picture" >
+    update picture
+    <set >
+      <if test="pictureIndex != null" >
+        pictureIndex = #{pictureIndex,jdbcType=SMALLINT},
+      </if>
+      <if test="modelCode != null" >
+        modelCode = #{modelCode,jdbcType=CHAR},
+      </if>
+    </set>
+    where filename = #{filename,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.Picture" >
+    update picture
+    set pictureIndex = #{pictureIndex,jdbcType=SMALLINT},
+      modelCode = #{modelCode,jdbcType=CHAR}
+    where filename = #{filename,jdbcType=VARCHAR}
+  </update>
+</mapper>

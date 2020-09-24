@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.WholesaleOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.WholesaleOrder" >
+    <id column="wholesaleOrdCode" property="wholesaleOrdCode" jdbcType="CHAR" />
+    <result column="shippingAddrNum" property="shippingAddrNum" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="orderState" property="orderState" jdbcType="CHAR" />
+    <result column="shippingCode" property="shippingCode" jdbcType="VARCHAR" />
+    <result column="sumPrice" property="sumPrice" jdbcType="DOUBLE" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="orderRate" property="orderRate" jdbcType="CHAR" />
+    <result column="orderComment" property="orderComment" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    wholesaleOrdCode, shippingAddrNum, username, orderState, shippingCode, sumPrice, 
+    time, remark, orderRate, orderComment
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.WholesaleOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wholesaleorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wholesaleorder
+    where wholesaleOrdCode = #{wholesaleOrdCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wholesaleorder
+    where wholesaleOrdCode = #{wholesaleOrdCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleOrderExample" >
+    delete from wholesaleorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.WholesaleOrder" >
+    insert into wholesaleorder (wholesaleOrdCode, shippingAddrNum, username, 
+      orderState, shippingCode, sumPrice, 
+      time, remark, orderRate, 
+      orderComment)
+    values (#{wholesaleOrdCode,jdbcType=CHAR}, #{shippingAddrNum,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, 
+      #{orderState,jdbcType=CHAR}, #{shippingCode,jdbcType=VARCHAR}, #{sumPrice,jdbcType=DOUBLE}, 
+      #{time,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{orderRate,jdbcType=CHAR}, 
+      #{orderComment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleOrder" >
+    insert into wholesaleorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wholesaleOrdCode != null" >
+        wholesaleOrdCode,
+      </if>
+      <if test="shippingAddrNum != null" >
+        shippingAddrNum,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="orderState != null" >
+        orderState,
+      </if>
+      <if test="shippingCode != null" >
+        shippingCode,
+      </if>
+      <if test="sumPrice != null" >
+        sumPrice,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="orderRate != null" >
+        orderRate,
+      </if>
+      <if test="orderComment != null" >
+        orderComment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wholesaleOrdCode != null" >
+        #{wholesaleOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="shippingAddrNum != null" >
+        #{shippingAddrNum,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        #{orderState,jdbcType=CHAR},
+      </if>
+      <if test="shippingCode != null" >
+        #{shippingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sumPrice != null" >
+        #{sumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRate != null" >
+        #{orderRate,jdbcType=CHAR},
+      </if>
+      <if test="orderComment != null" >
+        #{orderComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleOrderExample" resultType="java.lang.Integer" >
+    select count(*) from wholesaleorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wholesaleorder
+    <set >
+      <if test="record.wholesaleOrdCode != null" >
+        wholesaleOrdCode = #{record.wholesaleOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="record.shippingAddrNum != null" >
+        shippingAddrNum = #{record.shippingAddrNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderState != null" >
+        orderState = #{record.orderState,jdbcType=CHAR},
+      </if>
+      <if test="record.shippingCode != null" >
+        shippingCode = #{record.shippingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sumPrice != null" >
+        sumPrice = #{record.sumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderRate != null" >
+        orderRate = #{record.orderRate,jdbcType=CHAR},
+      </if>
+      <if test="record.orderComment != null" >
+        orderComment = #{record.orderComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wholesaleorder
+    set wholesaleOrdCode = #{record.wholesaleOrdCode,jdbcType=CHAR},
+      shippingAddrNum = #{record.shippingAddrNum,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      orderState = #{record.orderState,jdbcType=CHAR},
+      shippingCode = #{record.shippingCode,jdbcType=VARCHAR},
+      sumPrice = #{record.sumPrice,jdbcType=DOUBLE},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      orderRate = #{record.orderRate,jdbcType=CHAR},
+      orderComment = #{record.orderComment,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleOrder" >
+    update wholesaleorder
+    <set >
+      <if test="shippingAddrNum != null" >
+        shippingAddrNum = #{shippingAddrNum,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="orderState != null" >
+        orderState = #{orderState,jdbcType=CHAR},
+      </if>
+      <if test="shippingCode != null" >
+        shippingCode = #{shippingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sumPrice != null" >
+        sumPrice = #{sumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRate != null" >
+        orderRate = #{orderRate,jdbcType=CHAR},
+      </if>
+      <if test="orderComment != null" >
+        orderComment = #{orderComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wholesaleOrdCode = #{wholesaleOrdCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.WholesaleOrder" >
+    update wholesaleorder
+    set shippingAddrNum = #{shippingAddrNum,jdbcType=BIGINT},
+      username = #{username,jdbcType=VARCHAR},
+      orderState = #{orderState,jdbcType=CHAR},
+      shippingCode = #{shippingCode,jdbcType=VARCHAR},
+      sumPrice = #{sumPrice,jdbcType=DOUBLE},
+      time = #{time,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      orderRate = #{orderRate,jdbcType=CHAR},
+      orderComment = #{orderComment,jdbcType=VARCHAR}
+    where wholesaleOrdCode = #{wholesaleOrdCode,jdbcType=CHAR}
+  </update>
+
+
+  <select id="listByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select * from wholesaleorder  
+  	where 1= 1
+  	<if test="wholesaleOrdCode != null and wholesaleOrdCode !='' ">and wholesaleOrdCode like concat('%',#{wholesaleOrdCode},'%') </if>
+	<if test="username != null and username !='' ">and username like concat('%',#{username},'%') </if>  
+	<if test="orderState != null and orderState !='' ">and orderState = #{orderState} </if> 
+ 	order by wholesaleOrdCode asc
+  </select>
+</mapper>

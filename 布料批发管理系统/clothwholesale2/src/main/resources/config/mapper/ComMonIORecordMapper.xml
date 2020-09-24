@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.ComMonIORecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.ComMonIORecord" >
+    <id column="comIORecCode" property="comIORecCode" jdbcType="CHAR" />
+    <result column="adminCode" property="adminCode" jdbcType="CHAR" />
+    <result column="reason" property="reason" jdbcType="CHAR" />
+    <result column="IOmark" property="IOmark" jdbcType="CHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="amount" property="amount" jdbcType="DOUBLE" />
+    <result column="ordCode" property="ordCode" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    comIORecCode, adminCode, reason, IOmark, time, amount, ordCode, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.ComMonIORecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from commoniorecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from commoniorecord
+    where comIORecCode = #{comIORecCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from commoniorecord
+    where comIORecCode = #{comIORecCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.ComMonIORecordExample" >
+    delete from commoniorecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.ComMonIORecord" >
+    insert into commoniorecord (comIORecCode, adminCode, reason, 
+      IOmark, time, amount, 
+      ordCode, remark)
+    values (#{comIORecCode,jdbcType=CHAR}, #{adminCode,jdbcType=CHAR}, #{reason,jdbcType=CHAR}, 
+      #{IOmark,jdbcType=CHAR}, #{time,jdbcType=TIMESTAMP}, #{amount,jdbcType=DOUBLE}, 
+      #{ordCode,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.ComMonIORecord" >
+    insert into commoniorecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="comIORecCode != null" >
+        comIORecCode,
+      </if>
+      <if test="adminCode != null" >
+        adminCode,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="IOmark != null" >
+        IOmark,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="ordCode != null" >
+        ordCode,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="comIORecCode != null" >
+        #{comIORecCode,jdbcType=CHAR},
+      </if>
+      <if test="adminCode != null" >
+        #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=CHAR},
+      </if>
+      <if test="IOmark != null" >
+        #{IOmark,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="ordCode != null" >
+        #{ordCode,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.ComMonIORecordExample" resultType="java.lang.Integer" >
+    select count(*) from commoniorecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update commoniorecord
+    <set >
+      <if test="record.comIORecCode != null" >
+        comIORecCode = #{record.comIORecCode,jdbcType=CHAR},
+      </if>
+      <if test="record.adminCode != null" >
+        adminCode = #{record.adminCode,jdbcType=CHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=CHAR},
+      </if>
+      <if test="record.IOmark != null" >
+        IOmark = #{record.IOmark,jdbcType=CHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ordCode != null" >
+        ordCode = #{record.ordCode,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update commoniorecord
+    set comIORecCode = #{record.comIORecCode,jdbcType=CHAR},
+      adminCode = #{record.adminCode,jdbcType=CHAR},
+      reason = #{record.reason,jdbcType=CHAR},
+      IOmark = #{record.IOmark,jdbcType=CHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      amount = #{record.amount,jdbcType=DOUBLE},
+      ordCode = #{record.ordCode,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.ComMonIORecord" >
+    update commoniorecord
+    <set >
+      <if test="adminCode != null" >
+        adminCode = #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=CHAR},
+      </if>
+      <if test="IOmark != null" >
+        IOmark = #{IOmark,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="ordCode != null" >
+        ordCode = #{ordCode,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where comIORecCode = #{comIORecCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.ComMonIORecord" >
+    update commoniorecord
+    set adminCode = #{adminCode,jdbcType=CHAR},
+      reason = #{reason,jdbcType=CHAR},
+      IOmark = #{IOmark,jdbcType=CHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      amount = #{amount,jdbcType=DOUBLE},
+      ordCode = #{ordCode,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where comIORecCode = #{comIORecCode,jdbcType=CHAR}
+  </update>
+
+<select id="listByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select * from commoniorecord 
+  	where 1= 1
+  	<if test="adminCode != null and adminCode !='' ">and adminCode like concat('%',#{adminCode},'%') </if>
+	<if test="comIORecCode != null and comIORecCode !='' ">and comIORecCode like concat('%',#{comIORecCode},'%') </if>  
+	<if test="ordCode != null and ordCode !='' ">and ordCode like concat('%',#{ordCode},'%') </if> 
+	<if test="reason != null and reason != '' ">and reason like concat('%',#{reason},'%') </if> 
+	<if test="reason == null or reason == '' ">and reason like '%PF%'</if> 
+ 	order by comIORecCode asc
+  </select>
+</mapper>

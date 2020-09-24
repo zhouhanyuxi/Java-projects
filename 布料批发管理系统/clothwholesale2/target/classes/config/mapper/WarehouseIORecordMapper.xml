@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.WarehouseIORecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.WarehouseIORecord" >
+    <id column="warehouseIORecCode" property="warehouseIORecCode" jdbcType="CHAR" />
+    <result column="warehouseCode" property="warehouseCode" jdbcType="CHAR" />
+    <result column="modelCode" property="modelCode" jdbcType="CHAR" />
+    <result column="adminCode" property="adminCode" jdbcType="CHAR" />
+    <result column="numberChange" property="numberChange" jdbcType="INTEGER" />
+    <result column="reason" property="reason" jdbcType="CHAR" />
+    <result column="IOMark" property="IOMark" jdbcType="CHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="ordCode" property="ordCode" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    warehouseIORecCode, warehouseCode, modelCode, adminCode, numberChange, reason, IOMark, 
+    time, ordCode, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.WarehouseIORecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from warehouseiorecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from warehouseiorecord
+    where warehouseIORecCode = #{warehouseIORecCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from warehouseiorecord
+    where warehouseIORecCode = #{warehouseIORecCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.WarehouseIORecordExample" >
+    delete from warehouseiorecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.WarehouseIORecord" >
+    insert into warehouseiorecord (warehouseIORecCode, warehouseCode, modelCode, 
+      adminCode, numberChange, reason, 
+      IOMark, time, ordCode, 
+      remark)
+    values (#{warehouseIORecCode,jdbcType=CHAR}, #{warehouseCode,jdbcType=CHAR}, #{modelCode,jdbcType=CHAR}, 
+      #{adminCode,jdbcType=CHAR}, #{numberChange,jdbcType=INTEGER}, #{reason,jdbcType=CHAR}, 
+      #{IOMark,jdbcType=CHAR}, #{time,jdbcType=TIMESTAMP}, #{ordCode,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.WarehouseIORecord" >
+    insert into warehouseiorecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="warehouseIORecCode != null" >
+        warehouseIORecCode,
+      </if>
+      <if test="warehouseCode != null" >
+        warehouseCode,
+      </if>
+      <if test="modelCode != null" >
+        modelCode,
+      </if>
+      <if test="adminCode != null" >
+        adminCode,
+      </if>
+      <if test="numberChange != null" >
+        numberChange,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="IOMark != null" >
+        IOMark,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="ordCode != null" >
+        ordCode,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="warehouseIORecCode != null" >
+        #{warehouseIORecCode,jdbcType=CHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        #{warehouseCode,jdbcType=CHAR},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=CHAR},
+      </if>
+      <if test="adminCode != null" >
+        #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="numberChange != null" >
+        #{numberChange,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=CHAR},
+      </if>
+      <if test="IOMark != null" >
+        #{IOMark,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordCode != null" >
+        #{ordCode,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.WarehouseIORecordExample" resultType="java.lang.Integer" >
+    select count(*) from warehouseiorecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update warehouseiorecord
+    <set >
+      <if test="record.warehouseIORecCode != null" >
+        warehouseIORecCode = #{record.warehouseIORecCode,jdbcType=CHAR},
+      </if>
+      <if test="record.warehouseCode != null" >
+        warehouseCode = #{record.warehouseCode,jdbcType=CHAR},
+      </if>
+      <if test="record.modelCode != null" >
+        modelCode = #{record.modelCode,jdbcType=CHAR},
+      </if>
+      <if test="record.adminCode != null" >
+        adminCode = #{record.adminCode,jdbcType=CHAR},
+      </if>
+      <if test="record.numberChange != null" >
+        numberChange = #{record.numberChange,jdbcType=INTEGER},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=CHAR},
+      </if>
+      <if test="record.IOMark != null" >
+        IOMark = #{record.IOMark,jdbcType=CHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ordCode != null" >
+        ordCode = #{record.ordCode,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update warehouseiorecord
+    set warehouseIORecCode = #{record.warehouseIORecCode,jdbcType=CHAR},
+      warehouseCode = #{record.warehouseCode,jdbcType=CHAR},
+      modelCode = #{record.modelCode,jdbcType=CHAR},
+      adminCode = #{record.adminCode,jdbcType=CHAR},
+      numberChange = #{record.numberChange,jdbcType=INTEGER},
+      reason = #{record.reason,jdbcType=CHAR},
+      IOMark = #{record.IOMark,jdbcType=CHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      ordCode = #{record.ordCode,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.WarehouseIORecord" >
+    update warehouseiorecord
+    <set >
+      <if test="warehouseCode != null" >
+        warehouseCode = #{warehouseCode,jdbcType=CHAR},
+      </if>
+      <if test="modelCode != null" >
+        modelCode = #{modelCode,jdbcType=CHAR},
+      </if>
+      <if test="adminCode != null" >
+        adminCode = #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="numberChange != null" >
+        numberChange = #{numberChange,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=CHAR},
+      </if>
+      <if test="IOMark != null" >
+        IOMark = #{IOMark,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordCode != null" >
+        ordCode = #{ordCode,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where warehouseIORecCode = #{warehouseIORecCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.WarehouseIORecord" >
+    update warehouseiorecord
+    set warehouseCode = #{warehouseCode,jdbcType=CHAR},
+      modelCode = #{modelCode,jdbcType=CHAR},
+      adminCode = #{adminCode,jdbcType=CHAR},
+      numberChange = #{numberChange,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=CHAR},
+      IOMark = #{IOMark,jdbcType=CHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      ordCode = #{ordCode,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where warehouseIORecCode = #{warehouseIORecCode,jdbcType=CHAR}
+  </update>
+
+
+<select id="listByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select * from warehouseiorecord  
+  	where 1= 1
+  	<if test="warehouseIORecCode != null and warehouseIORecCode !='' ">and warehouseIORecCode like concat('%',#{warehouseIORecCode},'%') </if>
+	<if test="warehouseCode != null and warehouseCode !='' ">and warehouseCode like concat('%',#{warehouseCode},'%') </if>  
+ 	<if test="modelCode != null and modelCode !='' ">and modelCode like concat('%',#{modelCode},'%')</if> 
+ 	<if test="adminCode != null and adminCode !='' ">and adminCode like concat('%',#{adminCode},'%')</if>
+ 	<if test="IOMark != null and IOMark !='' ">and IOMark like concat('%',#{IOMark},'%')</if> 
+ 	<if test="ordCode != null and ordCode !='' ">and ordCode like concat('%',#{ordCode},'%')</if> 
+
+ 	order by warehouseIORecCode asc
+  </select>
+</mapper>

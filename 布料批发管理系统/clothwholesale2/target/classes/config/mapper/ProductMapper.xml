@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.Product" >
+    <id column="productCode" property="productCode" jdbcType="CHAR" />
+    <result column="productName" property="productName" jdbcType="VARCHAR" />
+    <result column="originalName" property="originalName" jdbcType="VARCHAR" />
+    <result column="originalPrice" property="originalPrice" jdbcType="DOUBLE" />
+    <result column="typeTotal" property="typeTotal" jdbcType="SMALLINT" />
+    <result column="width" property="width" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="thickness" property="thickness" jdbcType="VARCHAR" />
+    <result column="composition" property="composition" jdbcType="VARCHAR" />
+    <result column="ingredient" property="ingredient" jdbcType="VARCHAR" />
+    <result column="density" property="density" jdbcType="VARCHAR" />
+    <result column="textileProcess" property="textileProcess" jdbcType="VARCHAR" />
+    <result column="dyeProcess" property="dyeProcess" jdbcType="VARCHAR" />
+    <result column="fiberOrganization" property="fiberOrganization" jdbcType="VARCHAR" />
+    <result column="pattern" property="pattern" jdbcType="VARCHAR" />
+    <result column="mainUse" property="mainUse" jdbcType="VARCHAR" />
+    <result column="season" property="season" jdbcType="VARCHAR" />
+    <result column="shippingFee" property="shippingFee" jdbcType="REAL" />
+    <result column="intro" property="intro" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    productCode, productName, originalName, originalPrice, typeTotal, width, weight, 
+    thickness, composition, ingredient, density, textileProcess, dyeProcess, fiberOrganization, 
+    pattern, mainUse, season, shippingFee, intro, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.ProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where productCode = #{productCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from product
+    where productCode = #{productCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.ProductExample" >
+    delete from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.Product" >
+    insert into product (productCode, productName, originalName, 
+      originalPrice, typeTotal, width, 
+      weight, thickness, composition, 
+      ingredient, density, textileProcess, 
+      dyeProcess, fiberOrganization, pattern, 
+      mainUse, season, shippingFee, 
+      intro, state)
+    values (#{productCode,jdbcType=CHAR}, #{productName,jdbcType=VARCHAR}, #{originalName,jdbcType=VARCHAR}, 
+      #{originalPrice,jdbcType=DOUBLE}, #{typeTotal,jdbcType=SMALLINT}, #{width,jdbcType=INTEGER}, 
+      #{weight,jdbcType=INTEGER}, #{thickness,jdbcType=VARCHAR}, #{composition,jdbcType=VARCHAR}, 
+      #{ingredient,jdbcType=VARCHAR}, #{density,jdbcType=VARCHAR}, #{textileProcess,jdbcType=VARCHAR}, 
+      #{dyeProcess,jdbcType=VARCHAR}, #{fiberOrganization,jdbcType=VARCHAR}, #{pattern,jdbcType=VARCHAR}, 
+      #{mainUse,jdbcType=VARCHAR}, #{season,jdbcType=VARCHAR}, #{shippingFee,jdbcType=REAL}, 
+      #{intro,jdbcType=VARCHAR}, #{state,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productCode != null" >
+        productCode,
+      </if>
+      <if test="productName != null" >
+        productName,
+      </if>
+      <if test="originalName != null" >
+        originalName,
+      </if>
+      <if test="originalPrice != null" >
+        originalPrice,
+      </if>
+      <if test="typeTotal != null" >
+        typeTotal,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="thickness != null" >
+        thickness,
+      </if>
+      <if test="composition != null" >
+        composition,
+      </if>
+      <if test="ingredient != null" >
+        ingredient,
+      </if>
+      <if test="density != null" >
+        density,
+      </if>
+      <if test="textileProcess != null" >
+        textileProcess,
+      </if>
+      <if test="dyeProcess != null" >
+        dyeProcess,
+      </if>
+      <if test="fiberOrganization != null" >
+        fiberOrganization,
+      </if>
+      <if test="pattern != null" >
+        pattern,
+      </if>
+      <if test="mainUse != null" >
+        mainUse,
+      </if>
+      <if test="season != null" >
+        season,
+      </if>
+      <if test="shippingFee != null" >
+        shippingFee,
+      </if>
+      <if test="intro != null" >
+        intro,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productCode != null" >
+        #{productCode,jdbcType=CHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="originalName != null" >
+        #{originalName,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null" >
+        #{originalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="typeTotal != null" >
+        #{typeTotal,jdbcType=SMALLINT},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="thickness != null" >
+        #{thickness,jdbcType=VARCHAR},
+      </if>
+      <if test="composition != null" >
+        #{composition,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredient != null" >
+        #{ingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="density != null" >
+        #{density,jdbcType=VARCHAR},
+      </if>
+      <if test="textileProcess != null" >
+        #{textileProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="dyeProcess != null" >
+        #{dyeProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="fiberOrganization != null" >
+        #{fiberOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="pattern != null" >
+        #{pattern,jdbcType=VARCHAR},
+      </if>
+      <if test="mainUse != null" >
+        #{mainUse,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null" >
+        #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingFee != null" >
+        #{shippingFee,jdbcType=REAL},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.ProductExample" resultType="java.lang.Integer" >
+    select count(*) from product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update product
+    <set >
+      <if test="record.productCode != null" >
+        productCode = #{record.productCode,jdbcType=CHAR},
+      </if>
+      <if test="record.productName != null" >
+        productName = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalName != null" >
+        originalName = #{record.originalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalPrice != null" >
+        originalPrice = #{record.originalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.typeTotal != null" >
+        typeTotal = #{record.typeTotal,jdbcType=SMALLINT},
+      </if>
+      <if test="record.width != null" >
+        width = #{record.width,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=INTEGER},
+      </if>
+      <if test="record.thickness != null" >
+        thickness = #{record.thickness,jdbcType=VARCHAR},
+      </if>
+      <if test="record.composition != null" >
+        composition = #{record.composition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ingredient != null" >
+        ingredient = #{record.ingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.density != null" >
+        density = #{record.density,jdbcType=VARCHAR},
+      </if>
+      <if test="record.textileProcess != null" >
+        textileProcess = #{record.textileProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dyeProcess != null" >
+        dyeProcess = #{record.dyeProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fiberOrganization != null" >
+        fiberOrganization = #{record.fiberOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pattern != null" >
+        pattern = #{record.pattern,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainUse != null" >
+        mainUse = #{record.mainUse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.season != null" >
+        season = #{record.season,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingFee != null" >
+        shippingFee = #{record.shippingFee,jdbcType=REAL},
+      </if>
+      <if test="record.intro != null" >
+        intro = #{record.intro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update product
+    set productCode = #{record.productCode,jdbcType=CHAR},
+      productName = #{record.productName,jdbcType=VARCHAR},
+      originalName = #{record.originalName,jdbcType=VARCHAR},
+      originalPrice = #{record.originalPrice,jdbcType=DOUBLE},
+      typeTotal = #{record.typeTotal,jdbcType=SMALLINT},
+      width = #{record.width,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=INTEGER},
+      thickness = #{record.thickness,jdbcType=VARCHAR},
+      composition = #{record.composition,jdbcType=VARCHAR},
+      ingredient = #{record.ingredient,jdbcType=VARCHAR},
+      density = #{record.density,jdbcType=VARCHAR},
+      textileProcess = #{record.textileProcess,jdbcType=VARCHAR},
+      dyeProcess = #{record.dyeProcess,jdbcType=VARCHAR},
+      fiberOrganization = #{record.fiberOrganization,jdbcType=VARCHAR},
+      pattern = #{record.pattern,jdbcType=VARCHAR},
+      mainUse = #{record.mainUse,jdbcType=VARCHAR},
+      season = #{record.season,jdbcType=VARCHAR},
+      shippingFee = #{record.shippingFee,jdbcType=REAL},
+      intro = #{record.intro,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.Product" >
+    update product
+    <set >
+      <if test="productName != null" >
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="originalName != null" >
+        originalName = #{originalName,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null" >
+        originalPrice = #{originalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="typeTotal != null" >
+        typeTotal = #{typeTotal,jdbcType=SMALLINT},
+      </if>
+      <if test="width != null" >
+        width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="thickness != null" >
+        thickness = #{thickness,jdbcType=VARCHAR},
+      </if>
+      <if test="composition != null" >
+        composition = #{composition,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredient != null" >
+        ingredient = #{ingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="density != null" >
+        density = #{density,jdbcType=VARCHAR},
+      </if>
+      <if test="textileProcess != null" >
+        textileProcess = #{textileProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="dyeProcess != null" >
+        dyeProcess = #{dyeProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="fiberOrganization != null" >
+        fiberOrganization = #{fiberOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="pattern != null" >
+        pattern = #{pattern,jdbcType=VARCHAR},
+      </if>
+      <if test="mainUse != null" >
+        mainUse = #{mainUse,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null" >
+        season = #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingFee != null" >
+        shippingFee = #{shippingFee,jdbcType=REAL},
+      </if>
+      <if test="intro != null" >
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=CHAR},
+      </if>
+    </set>
+    where productCode = #{productCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.Product" >
+    update product
+    set productName = #{productName,jdbcType=VARCHAR},
+      originalName = #{originalName,jdbcType=VARCHAR},
+      originalPrice = #{originalPrice,jdbcType=DOUBLE},
+      typeTotal = #{typeTotal,jdbcType=SMALLINT},
+      width = #{width,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      thickness = #{thickness,jdbcType=VARCHAR},
+      composition = #{composition,jdbcType=VARCHAR},
+      ingredient = #{ingredient,jdbcType=VARCHAR},
+      density = #{density,jdbcType=VARCHAR},
+      textileProcess = #{textileProcess,jdbcType=VARCHAR},
+      dyeProcess = #{dyeProcess,jdbcType=VARCHAR},
+      fiberOrganization = #{fiberOrganization,jdbcType=VARCHAR},
+      pattern = #{pattern,jdbcType=VARCHAR},
+      mainUse = #{mainUse,jdbcType=VARCHAR},
+      season = #{season,jdbcType=VARCHAR},
+      shippingFee = #{shippingFee,jdbcType=REAL},
+      intro = #{intro,jdbcType=VARCHAR},
+      state = #{state,jdbcType=CHAR}
+    where productCode = #{productCode,jdbcType=CHAR}
+  </update>
+
+  <select id="listByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select * from product  
+  	where 1= 1
+  	<if test="productCode != null and productCode !='' ">and productCode like concat('%',#{productCode},'%') </if>
+	<if test="productName != null and productName !='' ">and productName like concat('%',#{productName},'%') </if>  
+ 	order by productCode asc
+  </select>
+  
+  <sql id="productPicList" >
+    productCode, productName, typeTotal, width, weight, 
+    thickness, state, filename
+  </sql>
+    <select id="listWithPicByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select
+  	<include refid="productPicList" />
+  	 from product,picture where picture.modelCode = concat(product.productCode,'000') and state = 'T'
+  	<if test="productCode != null and productCode !='' ">and productCode like concat('%',#{productCode},'%') </if>
+	<if test="productName != null and productName !='' ">and productName like concat('%',#{productName},'%') </if>
+	<if test="width != null and width !=''">and width BETWEEN 0 AND #{width,jdbcType=INTEGER} </if>
+	<if test="weight != null and weight !='' ">and weight BETWEEN 0 AND #{weight,jdbcType=INTEGER}</if>   
+ 	group by productCode
+ 	order by productCode asc
+  </select>
+</mapper>

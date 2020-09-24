@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.SellPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.SellPrice" >
+    <id column="sellPriceCode" property="sellPriceCode" jdbcType="CHAR" />
+    <result column="productCode" property="productCode" jdbcType="CHAR" />
+    <result column="lowerLimit" property="lowerLimit" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sellPriceCode, productCode, lowerLimit, price
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.SellPriceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sellprice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sellprice
+    where sellPriceCode = #{sellPriceCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sellprice
+    where sellPriceCode = #{sellPriceCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.SellPriceExample" >
+    delete from sellprice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.SellPrice" >
+    insert into sellprice (sellPriceCode, productCode, lowerLimit, 
+      price)
+    values (#{sellPriceCode,jdbcType=CHAR}, #{productCode,jdbcType=CHAR}, #{lowerLimit,jdbcType=INTEGER}, 
+      #{price,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.SellPrice" >
+    insert into sellprice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sellPriceCode != null" >
+        sellPriceCode,
+      </if>
+      <if test="productCode != null" >
+        productCode,
+      </if>
+      <if test="lowerLimit != null" >
+        lowerLimit,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sellPriceCode != null" >
+        #{sellPriceCode,jdbcType=CHAR},
+      </if>
+      <if test="productCode != null" >
+        #{productCode,jdbcType=CHAR},
+      </if>
+      <if test="lowerLimit != null" >
+        #{lowerLimit,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.SellPriceExample" resultType="java.lang.Integer" >
+    select count(*) from sellprice
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sellprice
+    <set >
+      <if test="record.sellPriceCode != null" >
+        sellPriceCode = #{record.sellPriceCode,jdbcType=CHAR},
+      </if>
+      <if test="record.productCode != null" >
+        productCode = #{record.productCode,jdbcType=CHAR},
+      </if>
+      <if test="record.lowerLimit != null" >
+        lowerLimit = #{record.lowerLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sellprice
+    set sellPriceCode = #{record.sellPriceCode,jdbcType=CHAR},
+      productCode = #{record.productCode,jdbcType=CHAR},
+      lowerLimit = #{record.lowerLimit,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.SellPrice" >
+    update sellprice
+    <set >
+      <if test="productCode != null" >
+        productCode = #{productCode,jdbcType=CHAR},
+      </if>
+      <if test="lowerLimit != null" >
+        lowerLimit = #{lowerLimit,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+    </set>
+    where sellPriceCode = #{sellPriceCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.SellPrice" >
+    update sellprice
+    set productCode = #{productCode,jdbcType=CHAR},
+      lowerLimit = #{lowerLimit,jdbcType=INTEGER},
+      price = #{price,jdbcType=REAL}
+    where sellPriceCode = #{sellPriceCode,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.WholesaleExchangeRecMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.WholesaleExchangeRec" >
+    <id column="exchangeRecNum" property="exchangeRecNum" jdbcType="BIGINT" />
+    <result column="adminCode" property="adminCode" jdbcType="CHAR" />
+    <result column="wholesaleItemCode" property="wholesaleItemCode" jdbcType="CHAR" />
+    <result column="exchangeNum" property="exchangeNum" jdbcType="INTEGER" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="backShipCode" property="backShipCode" jdbcType="VARCHAR" />
+    <result column="resendShipCode" property="resendShipCode" jdbcType="VARCHAR" />
+    <result column="recordState" property="recordState" jdbcType="CHAR" />
+    <result column="state" property="state" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exchangeRecNum, adminCode, wholesaleItemCode, exchangeNum, reason, backShipCode, 
+    resendShipCode, recordState, state, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.WholesaleExchangeRecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wholesaleexchangerec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from wholesaleexchangerec
+    where exchangeRecNum = #{exchangeRecNum,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from wholesaleexchangerec
+    where exchangeRecNum = #{exchangeRecNum,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleExchangeRecExample" >
+    delete from wholesaleexchangerec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.WholesaleExchangeRec" useGeneratedKeys="true" keyProperty="exchangeRecNum" >
+    insert into wholesaleexchangerec (adminCode, wholesaleItemCode, exchangeNum, 
+      reason, backShipCode, resendShipCode, 
+      recordState, state, remark
+      )
+    values (#{adminCode,jdbcType=CHAR}, #{wholesaleItemCode,jdbcType=CHAR}, #{exchangeNum,jdbcType=INTEGER}, 
+      #{reason,jdbcType=VARCHAR}, #{backShipCode,jdbcType=VARCHAR}, #{resendShipCode,jdbcType=VARCHAR}, 
+      #{recordState,jdbcType=CHAR}, #{state,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleExchangeRec" useGeneratedKeys="true" keyProperty="exchangeRecNum" >
+    insert into wholesaleexchangerec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminCode != null" >
+        adminCode,
+      </if>
+      <if test="wholesaleItemCode != null" >
+        wholesaleItemCode,
+      </if>
+      <if test="exchangeNum != null" >
+        exchangeNum,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="backShipCode != null" >
+        backShipCode,
+      </if>
+      <if test="resendShipCode != null" >
+        resendShipCode,
+      </if>
+      <if test="recordState != null" >
+        recordState,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminCode != null" >
+        #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="wholesaleItemCode != null" >
+        #{wholesaleItemCode,jdbcType=CHAR},
+      </if>
+      <if test="exchangeNum != null" >
+        #{exchangeNum,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="backShipCode != null" >
+        #{backShipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resendShipCode != null" >
+        #{resendShipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        #{recordState,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleExchangeRecExample" resultType="java.lang.Integer" >
+    select count(*) from wholesaleexchangerec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wholesaleexchangerec
+    <set >
+      <if test="record.exchangeRecNum != null" >
+        exchangeRecNum = #{record.exchangeRecNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminCode != null" >
+        adminCode = #{record.adminCode,jdbcType=CHAR},
+      </if>
+      <if test="record.wholesaleItemCode != null" >
+        wholesaleItemCode = #{record.wholesaleItemCode,jdbcType=CHAR},
+      </if>
+      <if test="record.exchangeNum != null" >
+        exchangeNum = #{record.exchangeNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backShipCode != null" >
+        backShipCode = #{record.backShipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resendShipCode != null" >
+        resendShipCode = #{record.resendShipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordState != null" >
+        recordState = #{record.recordState,jdbcType=CHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wholesaleexchangerec
+    set exchangeRecNum = #{record.exchangeRecNum,jdbcType=BIGINT},
+      adminCode = #{record.adminCode,jdbcType=CHAR},
+      wholesaleItemCode = #{record.wholesaleItemCode,jdbcType=CHAR},
+      exchangeNum = #{record.exchangeNum,jdbcType=INTEGER},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      backShipCode = #{record.backShipCode,jdbcType=VARCHAR},
+      resendShipCode = #{record.resendShipCode,jdbcType=VARCHAR},
+      recordState = #{record.recordState,jdbcType=CHAR},
+      state = #{record.state,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleExchangeRec" >
+    update wholesaleexchangerec
+    <set >
+      <if test="adminCode != null" >
+        adminCode = #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="wholesaleItemCode != null" >
+        wholesaleItemCode = #{wholesaleItemCode,jdbcType=CHAR},
+      </if>
+      <if test="exchangeNum != null" >
+        exchangeNum = #{exchangeNum,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="backShipCode != null" >
+        backShipCode = #{backShipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resendShipCode != null" >
+        resendShipCode = #{resendShipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        recordState = #{recordState,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where exchangeRecNum = #{exchangeRecNum,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.WholesaleExchangeRec" >
+    update wholesaleexchangerec
+    set adminCode = #{adminCode,jdbcType=CHAR},
+      wholesaleItemCode = #{wholesaleItemCode,jdbcType=CHAR},
+      exchangeNum = #{exchangeNum,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      backShipCode = #{backShipCode,jdbcType=VARCHAR},
+      resendShipCode = #{resendShipCode,jdbcType=VARCHAR},
+      recordState = #{recordState,jdbcType=CHAR},
+      state = #{state,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where exchangeRecNum = #{exchangeRecNum,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.PurchaseOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.PurchaseOrder" >
+    <id column="purchaseOrdCode" property="purchaseOrdCode" jdbcType="CHAR" />
+    <result column="supplierCode" property="supplierCode" jdbcType="CHAR" />
+    <result column="adminCode" property="adminCode" jdbcType="CHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="sumPrice" property="sumPrice" jdbcType="DOUBLE" />
+    <result column="paidPrice" property="paidPrice" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    purchaseOrdCode, supplierCode, adminCode, time, sumPrice, paidPrice, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.PurchaseOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from purchaseorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchaseorder
+    where purchaseOrdCode = #{purchaseOrdCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from purchaseorder
+    where purchaseOrdCode = #{purchaseOrdCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.PurchaseOrderExample" >
+    delete from purchaseorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.PurchaseOrder" >
+    insert into purchaseorder (purchaseOrdCode, supplierCode, adminCode, 
+      time, sumPrice, paidPrice, 
+      remark)
+    values (#{purchaseOrdCode,jdbcType=CHAR}, #{supplierCode,jdbcType=CHAR}, #{adminCode,jdbcType=CHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{sumPrice,jdbcType=DOUBLE}, #{paidPrice,jdbcType=DOUBLE}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.PurchaseOrder" >
+    insert into purchaseorder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseOrdCode != null" >
+        purchaseOrdCode,
+      </if>
+      <if test="supplierCode != null" >
+        supplierCode,
+      </if>
+      <if test="adminCode != null" >
+        adminCode,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="sumPrice != null" >
+        sumPrice,
+      </if>
+      <if test="paidPrice != null" >
+        paidPrice,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseOrdCode != null" >
+        #{purchaseOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="supplierCode != null" >
+        #{supplierCode,jdbcType=CHAR},
+      </if>
+      <if test="adminCode != null" >
+        #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sumPrice != null" >
+        #{sumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="paidPrice != null" >
+        #{paidPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.PurchaseOrderExample" resultType="java.lang.Integer" >
+    select count(*) from purchaseorder
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update purchaseorder
+    <set >
+      <if test="record.purchaseOrdCode != null" >
+        purchaseOrdCode = #{record.purchaseOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="record.supplierCode != null" >
+        supplierCode = #{record.supplierCode,jdbcType=CHAR},
+      </if>
+      <if test="record.adminCode != null" >
+        adminCode = #{record.adminCode,jdbcType=CHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sumPrice != null" >
+        sumPrice = #{record.sumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.paidPrice != null" >
+        paidPrice = #{record.paidPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update purchaseorder
+    set purchaseOrdCode = #{record.purchaseOrdCode,jdbcType=CHAR},
+      supplierCode = #{record.supplierCode,jdbcType=CHAR},
+      adminCode = #{record.adminCode,jdbcType=CHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      sumPrice = #{record.sumPrice,jdbcType=DOUBLE},
+      paidPrice = #{record.paidPrice,jdbcType=DOUBLE},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.PurchaseOrder" >
+    update purchaseorder
+    <set >
+      <if test="supplierCode != null" >
+        supplierCode = #{supplierCode,jdbcType=CHAR},
+      </if>
+      <if test="adminCode != null" >
+        adminCode = #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sumPrice != null" >
+        sumPrice = #{sumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="paidPrice != null" >
+        paidPrice = #{paidPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where purchaseOrdCode = #{purchaseOrdCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.PurchaseOrder" >
+    update purchaseorder
+    set supplierCode = #{supplierCode,jdbcType=CHAR},
+      adminCode = #{adminCode,jdbcType=CHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      sumPrice = #{sumPrice,jdbcType=DOUBLE},
+      paidPrice = #{paidPrice,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where purchaseOrdCode = #{purchaseOrdCode,jdbcType=CHAR}
+  </update>
+
+
+
+
+<select id="pageSelectPaidPurchaseOrders" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+    from purchaseorder
+    <where>
+    	<if test="purchaseOrdCode != null and purchaseOrdCode != ''">
+    		and purchaseOrdCode LIKE 'CG${purchaseOrdCode}%'
+    	</if>
+    	<if test="supplierCode != null and supplierCode != ''">
+    		and supplierCode like '%${supplierCode}%'
+    	</if>
+    	<if test="adminCode != null and adminCode != ''">
+    		and adminCode = #{adminCode}
+    	</if>
+    		and sumPrice = paidPrice
+    </where>
+  </select>
+  <update id="updatePurcOrdSumPrice" >
+  	update purchaseorder set sumPrice = sumPrice + #{price} where purchaseOrdCode = #{pOrdCode}
+  </update>
+  <update id="updatePurcOrdPaidPrice" >
+  	update purchaseorder set paidPrice = paidPrice + #{price} where purchaseOrdCode = #{pOrdCode}
+  </update>
+ <select id="listByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select * from purchaseorder 
+  	where 1= 1
+  	<if test="purchaseOrdCode != null and purchaseOrdCode !='' ">and purchaseOrdCode like concat('%',#{purchaseOrdCode},'%') </if>
+  	<if test="supplierCode != null and supplierCode !='' ">and supplierCode like concat('%',#{supplierCode},'%') </if>
+	<if test="type ==1 ">and sumprice = paidPrice </if>  
+	<if test="type ==0 ">and sumprice > paidPrice </if>  
+ 	order by purchaseOrdCode asc
+  </select>
+</mapper>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.WholesaleCancelRecMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.WholesaleCancelRec" >
+    <id column="cancelRecNum" property="cancelRecNum" jdbcType="BIGINT" />
+    <result column="adminCode" property="adminCode" jdbcType="CHAR" />
+    <result column="wholesaleOrdCode" property="wholesaleOrdCode" jdbcType="CHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="recordState" property="recordState" jdbcType="CHAR" />
+    <result column="moneyState" property="moneyState" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cancelRecNum, adminCode, wholesaleOrdCode, reason, recordState, moneyState, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.WholesaleCancelRecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wholesalecancelrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from wholesalecancelrec
+    where cancelRecNum = #{cancelRecNum,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from wholesalecancelrec
+    where cancelRecNum = #{cancelRecNum,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleCancelRecExample" >
+    delete from wholesalecancelrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.WholesaleCancelRec" useGeneratedKeys="true" keyProperty="cancelRecNum" >
+    insert into wholesalecancelrec (adminCode, wholesaleOrdCode, reason, 
+      recordState, moneyState, remark
+      )
+    values (#{adminCode,jdbcType=CHAR}, #{wholesaleOrdCode,jdbcType=CHAR}, #{reason,jdbcType=VARCHAR}, 
+      #{recordState,jdbcType=CHAR}, #{moneyState,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleCancelRec" useGeneratedKeys="true" keyProperty="cancelRecNum" >
+    insert into wholesalecancelrec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminCode != null" >
+        adminCode,
+      </if>
+      <if test="wholesaleOrdCode != null" >
+        wholesaleOrdCode,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="recordState != null" >
+        recordState,
+      </if>
+      <if test="moneyState != null" >
+        moneyState,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminCode != null" >
+        #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="wholesaleOrdCode != null" >
+        #{wholesaleOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        #{recordState,jdbcType=CHAR},
+      </if>
+      <if test="moneyState != null" >
+        #{moneyState,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleCancelRecExample" resultType="java.lang.Integer" >
+    select count(*) from wholesalecancelrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wholesalecancelrec
+    <set >
+      <if test="record.cancelRecNum != null" >
+        cancelRecNum = #{record.cancelRecNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminCode != null" >
+        adminCode = #{record.adminCode,jdbcType=CHAR},
+      </if>
+      <if test="record.wholesaleOrdCode != null" >
+        wholesaleOrdCode = #{record.wholesaleOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordState != null" >
+        recordState = #{record.recordState,jdbcType=CHAR},
+      </if>
+      <if test="record.moneyState != null" >
+        moneyState = #{record.moneyState,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wholesalecancelrec
+    set cancelRecNum = #{record.cancelRecNum,jdbcType=BIGINT},
+      adminCode = #{record.adminCode,jdbcType=CHAR},
+      wholesaleOrdCode = #{record.wholesaleOrdCode,jdbcType=CHAR},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      recordState = #{record.recordState,jdbcType=CHAR},
+      moneyState = #{record.moneyState,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleCancelRec" >
+    update wholesalecancelrec
+    <set >
+      <if test="adminCode != null" >
+        adminCode = #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="wholesaleOrdCode != null" >
+        wholesaleOrdCode = #{wholesaleOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        recordState = #{recordState,jdbcType=CHAR},
+      </if>
+      <if test="moneyState != null" >
+        moneyState = #{moneyState,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cancelRecNum = #{cancelRecNum,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.WholesaleCancelRec" >
+    update wholesalecancelrec
+    set adminCode = #{adminCode,jdbcType=CHAR},
+      wholesaleOrdCode = #{wholesaleOrdCode,jdbcType=CHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      recordState = #{recordState,jdbcType=CHAR},
+      moneyState = #{moneyState,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where cancelRecNum = #{cancelRecNum,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="listByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select * from wholesalecancelrec  
+  	where 1= 1
+  	<if test="wholesaleOrdCode != null and wholesaleOrdCode !='' ">and wholesaleOrdCode like concat('%',#{wholesaleOrdCode},'%') </if>
+	<if test="adminCode != null and adminCode !='' ">and adminCode like concat('%',#{adminCode},'%') </if> 
+	<if test="recordState != null and recordState !='' ">and recordState like concat('%',#{recordState},'%') </if>   
+ 	order by wholesaleOrdCode asc
+  </select>
+</mapper>

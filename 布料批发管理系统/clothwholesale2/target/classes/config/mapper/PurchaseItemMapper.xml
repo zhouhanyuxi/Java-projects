@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.PurchaseItemMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.PurchaseItem" >
+    <id column="purchaseItemCode" property="purchaseItemCode" jdbcType="CHAR" />
+    <result column="purchaseOrdCode" property="purchaseOrdCode" jdbcType="CHAR" />
+    <result column="modelCode" property="modelCode" jdbcType="CHAR" />
+    <result column="totalNum" property="totalNum" jdbcType="INTEGER" />
+    <result column="orignalPrice" property="orignalPrice" jdbcType="REAL" />
+    <result column="totalPrice" property="totalPrice" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    purchaseItemCode, purchaseOrdCode, modelCode, totalNum, orignalPrice, totalPrice, 
+    state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.PurchaseItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from purchaseitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchaseitem
+    where purchaseItemCode = #{purchaseItemCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from purchaseitem
+    where purchaseItemCode = #{purchaseItemCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.PurchaseItemExample" >
+    delete from purchaseitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.PurchaseItem" >
+    insert into purchaseitem (purchaseItemCode, purchaseOrdCode, modelCode, 
+      totalNum, orignalPrice, totalPrice, 
+      state)
+    values (#{purchaseItemCode,jdbcType=CHAR}, #{purchaseOrdCode,jdbcType=CHAR}, #{modelCode,jdbcType=CHAR}, 
+      #{totalNum,jdbcType=INTEGER}, #{orignalPrice,jdbcType=REAL}, #{totalPrice,jdbcType=DOUBLE}, 
+      #{state,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.PurchaseItem" >
+    insert into purchaseitem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purchaseItemCode != null" >
+        purchaseItemCode,
+      </if>
+      <if test="purchaseOrdCode != null" >
+        purchaseOrdCode,
+      </if>
+      <if test="modelCode != null" >
+        modelCode,
+      </if>
+      <if test="totalNum != null" >
+        totalNum,
+      </if>
+      <if test="orignalPrice != null" >
+        orignalPrice,
+      </if>
+      <if test="totalPrice != null" >
+        totalPrice,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purchaseItemCode != null" >
+        #{purchaseItemCode,jdbcType=CHAR},
+      </if>
+      <if test="purchaseOrdCode != null" >
+        #{purchaseOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=CHAR},
+      </if>
+      <if test="totalNum != null" >
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="orignalPrice != null" >
+        #{orignalPrice,jdbcType=REAL},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.PurchaseItemExample" resultType="java.lang.Integer" >
+    select count(*) from purchaseitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update purchaseitem
+    <set >
+      <if test="record.purchaseItemCode != null" >
+        purchaseItemCode = #{record.purchaseItemCode,jdbcType=CHAR},
+      </if>
+      <if test="record.purchaseOrdCode != null" >
+        purchaseOrdCode = #{record.purchaseOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="record.modelCode != null" >
+        modelCode = #{record.modelCode,jdbcType=CHAR},
+      </if>
+      <if test="record.totalNum != null" >
+        totalNum = #{record.totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.orignalPrice != null" >
+        orignalPrice = #{record.orignalPrice,jdbcType=REAL},
+      </if>
+      <if test="record.totalPrice != null" >
+        totalPrice = #{record.totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update purchaseitem
+    set purchaseItemCode = #{record.purchaseItemCode,jdbcType=CHAR},
+      purchaseOrdCode = #{record.purchaseOrdCode,jdbcType=CHAR},
+      modelCode = #{record.modelCode,jdbcType=CHAR},
+      totalNum = #{record.totalNum,jdbcType=INTEGER},
+      orignalPrice = #{record.orignalPrice,jdbcType=REAL},
+      totalPrice = #{record.totalPrice,jdbcType=DOUBLE},
+      state = #{record.state,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.PurchaseItem" >
+    update purchaseitem
+    <set >
+      <if test="purchaseOrdCode != null" >
+        purchaseOrdCode = #{purchaseOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="modelCode != null" >
+        modelCode = #{modelCode,jdbcType=CHAR},
+      </if>
+      <if test="totalNum != null" >
+        totalNum = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="orignalPrice != null" >
+        orignalPrice = #{orignalPrice,jdbcType=REAL},
+      </if>
+      <if test="totalPrice != null" >
+        totalPrice = #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=CHAR},
+      </if>
+    </set>
+    where purchaseItemCode = #{purchaseItemCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.PurchaseItem" >
+    update purchaseitem
+    set purchaseOrdCode = #{purchaseOrdCode,jdbcType=CHAR},
+      modelCode = #{modelCode,jdbcType=CHAR},
+      totalNum = #{totalNum,jdbcType=INTEGER},
+      orignalPrice = #{orignalPrice,jdbcType=REAL},
+      totalPrice = #{totalPrice,jdbcType=DOUBLE},
+      state = #{state,jdbcType=CHAR}
+    where purchaseItemCode = #{purchaseItemCode,jdbcType=CHAR}
+  </update>
+  
+  
+  <select id="listByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select * from purchaseitem
+  	where 1= 1
+  	<if test="purchaseItemCode != null and purchaseItemCode !='' ">and purchaseItemCode like concat('%',#{purchaseItemCode},'%') </if>
+	<if test="modelCode != null and modelCode !='' ">and modelCode like concat('%',#{modelCode},'%') </if>  
+ 	<if test="state != null and state !='' ">and state like '%DR%' </if>
+ 	<if test="type != null and type !='' ">and state like concat('%',#{type},'%') </if>
+ 	order by purchaseItemCode asc
+  </select>
+</mapper>

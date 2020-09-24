@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.WholesaleItemMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.WholesaleItem" >
+    <id column="wholesaleItemCode" property="wholesaleItemCode" jdbcType="CHAR" />
+    <result column="wholesaleOrdCode" property="wholesaleOrdCode" jdbcType="CHAR" />
+    <result column="modelCode" property="modelCode" jdbcType="CHAR" />
+    <result column="totalNum" property="totalNum" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="totalPrice" property="totalPrice" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    wholesaleItemCode, wholesaleOrdCode, modelCode, totalNum, price, totalPrice, state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.WholesaleItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wholesaleitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wholesaleitem
+    where wholesaleItemCode = #{wholesaleItemCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wholesaleitem
+    where wholesaleItemCode = #{wholesaleItemCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleItemExample" >
+    delete from wholesaleitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.WholesaleItem" >
+    insert into wholesaleitem (wholesaleItemCode, wholesaleOrdCode, modelCode, 
+      totalNum, price, totalPrice, 
+      state)
+    values (#{wholesaleItemCode,jdbcType=CHAR}, #{wholesaleOrdCode,jdbcType=CHAR}, #{modelCode,jdbcType=CHAR}, 
+      #{totalNum,jdbcType=INTEGER}, #{price,jdbcType=REAL}, #{totalPrice,jdbcType=DOUBLE}, 
+      #{state,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleItem" >
+    insert into wholesaleitem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wholesaleItemCode != null" >
+        wholesaleItemCode,
+      </if>
+      <if test="wholesaleOrdCode != null" >
+        wholesaleOrdCode,
+      </if>
+      <if test="modelCode != null" >
+        modelCode,
+      </if>
+      <if test="totalNum != null" >
+        totalNum,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="totalPrice != null" >
+        totalPrice,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wholesaleItemCode != null" >
+        #{wholesaleItemCode,jdbcType=CHAR},
+      </if>
+      <if test="wholesaleOrdCode != null" >
+        #{wholesaleOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="modelCode != null" >
+        #{modelCode,jdbcType=CHAR},
+      </if>
+      <if test="totalNum != null" >
+        #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleItemExample" resultType="java.lang.Integer" >
+    select count(*) from wholesaleitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wholesaleitem
+    <set >
+      <if test="record.wholesaleItemCode != null" >
+        wholesaleItemCode = #{record.wholesaleItemCode,jdbcType=CHAR},
+      </if>
+      <if test="record.wholesaleOrdCode != null" >
+        wholesaleOrdCode = #{record.wholesaleOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="record.modelCode != null" >
+        modelCode = #{record.modelCode,jdbcType=CHAR},
+      </if>
+      <if test="record.totalNum != null" >
+        totalNum = #{record.totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.totalPrice != null" >
+        totalPrice = #{record.totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wholesaleitem
+    set wholesaleItemCode = #{record.wholesaleItemCode,jdbcType=CHAR},
+      wholesaleOrdCode = #{record.wholesaleOrdCode,jdbcType=CHAR},
+      modelCode = #{record.modelCode,jdbcType=CHAR},
+      totalNum = #{record.totalNum,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=REAL},
+      totalPrice = #{record.totalPrice,jdbcType=DOUBLE},
+      state = #{record.state,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleItem" >
+    update wholesaleitem
+    <set >
+      <if test="wholesaleOrdCode != null" >
+        wholesaleOrdCode = #{wholesaleOrdCode,jdbcType=CHAR},
+      </if>
+      <if test="modelCode != null" >
+        modelCode = #{modelCode,jdbcType=CHAR},
+      </if>
+      <if test="totalNum != null" >
+        totalNum = #{totalNum,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="totalPrice != null" >
+        totalPrice = #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=CHAR},
+      </if>
+    </set>
+    where wholesaleItemCode = #{wholesaleItemCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.WholesaleItem" >
+    update wholesaleitem
+    set wholesaleOrdCode = #{wholesaleOrdCode,jdbcType=CHAR},
+      modelCode = #{modelCode,jdbcType=CHAR},
+      totalNum = #{totalNum,jdbcType=INTEGER},
+      price = #{price,jdbcType=REAL},
+      totalPrice = #{totalPrice,jdbcType=DOUBLE},
+      state = #{state,jdbcType=CHAR}
+    where wholesaleItemCode = #{wholesaleItemCode,jdbcType=CHAR}
+  </update>
+  
+  
+  <select id="listByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select 
+		wholesaleItemCode,wi.wholesaleOrdCode,modelCode,state
+  	 from wholesaleitem wi,wholesaleorder wo 
+  	where 1=1 and wi.wholesaleOrdCode = wo.wholesaleOrdCode
+  	<if test="wholesaleOrdCode != null and wholesaleOrdCode !='' ">and wi.wholesaleOrdCode like concat('%',#{wholesaleOrdCode},'%') </if> 
+ 	<if test="state != null and state !='' ">and orderState like '%DC%' </if>
+ 	group by wi.wholesaleItemCode
+ 	order by wi.wholesaleItemCode asc
+  </select>
+</mapper>

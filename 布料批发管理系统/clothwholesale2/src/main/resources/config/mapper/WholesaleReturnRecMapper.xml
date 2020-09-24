@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.WholesaleReturnRecMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.WholesaleReturnRec" >
+    <id column="returnRecNum" property="returnRecNum" jdbcType="BIGINT" />
+    <result column="adminCode" property="adminCode" jdbcType="CHAR" />
+    <result column="wholesaleItemCode" property="wholesaleItemCode" jdbcType="CHAR" />
+    <result column="returnNum" property="returnNum" jdbcType="INTEGER" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="shippingCode" property="shippingCode" jdbcType="VARCHAR" />
+    <result column="recordState" property="recordState" jdbcType="CHAR" />
+    <result column="productState" property="productState" jdbcType="CHAR" />
+    <result column="moneystate" property="moneystate" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    returnRecNum, adminCode, wholesaleItemCode, returnNum, reason, shippingCode, recordState, 
+    productState, moneystate, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.WholesaleReturnRecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wholesalereturnrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from wholesalereturnrec
+    where returnRecNum = #{returnRecNum,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from wholesalereturnrec
+    where returnRecNum = #{returnRecNum,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleReturnRecExample" >
+    delete from wholesalereturnrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.WholesaleReturnRec" useGeneratedKeys="true" keyProperty="returnRecNum" >
+    insert into wholesalereturnrec (adminCode, wholesaleItemCode, returnNum, 
+      reason, shippingCode, recordState, 
+      productState, moneystate, remark
+      )
+    values (#{adminCode,jdbcType=CHAR}, #{wholesaleItemCode,jdbcType=CHAR}, #{returnNum,jdbcType=INTEGER}, 
+      #{reason,jdbcType=VARCHAR}, #{shippingCode,jdbcType=VARCHAR}, #{recordState,jdbcType=CHAR}, 
+      #{productState,jdbcType=CHAR}, #{moneystate,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleReturnRec" useGeneratedKeys="true" keyProperty="returnRecNum" >
+    insert into wholesalereturnrec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminCode != null" >
+        adminCode,
+      </if>
+      <if test="wholesaleItemCode != null" >
+        wholesaleItemCode,
+      </if>
+      <if test="returnNum != null" >
+        returnNum,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="shippingCode != null" >
+        shippingCode,
+      </if>
+      <if test="recordState != null" >
+        recordState,
+      </if>
+      <if test="productState != null" >
+        productState,
+      </if>
+      <if test="moneystate != null" >
+        moneystate,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminCode != null" >
+        #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="wholesaleItemCode != null" >
+        #{wholesaleItemCode,jdbcType=CHAR},
+      </if>
+      <if test="returnNum != null" >
+        #{returnNum,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingCode != null" >
+        #{shippingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        #{recordState,jdbcType=CHAR},
+      </if>
+      <if test="productState != null" >
+        #{productState,jdbcType=CHAR},
+      </if>
+      <if test="moneystate != null" >
+        #{moneystate,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.WholesaleReturnRecExample" resultType="java.lang.Integer" >
+    select count(*) from wholesalereturnrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update wholesalereturnrec
+    <set >
+      <if test="record.returnRecNum != null" >
+        returnRecNum = #{record.returnRecNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.adminCode != null" >
+        adminCode = #{record.adminCode,jdbcType=CHAR},
+      </if>
+      <if test="record.wholesaleItemCode != null" >
+        wholesaleItemCode = #{record.wholesaleItemCode,jdbcType=CHAR},
+      </if>
+      <if test="record.returnNum != null" >
+        returnNum = #{record.returnNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.reason != null" >
+        reason = #{record.reason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippingCode != null" >
+        shippingCode = #{record.shippingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordState != null" >
+        recordState = #{record.recordState,jdbcType=CHAR},
+      </if>
+      <if test="record.productState != null" >
+        productState = #{record.productState,jdbcType=CHAR},
+      </if>
+      <if test="record.moneystate != null" >
+        moneystate = #{record.moneystate,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update wholesalereturnrec
+    set returnRecNum = #{record.returnRecNum,jdbcType=BIGINT},
+      adminCode = #{record.adminCode,jdbcType=CHAR},
+      wholesaleItemCode = #{record.wholesaleItemCode,jdbcType=CHAR},
+      returnNum = #{record.returnNum,jdbcType=INTEGER},
+      reason = #{record.reason,jdbcType=VARCHAR},
+      shippingCode = #{record.shippingCode,jdbcType=VARCHAR},
+      recordState = #{record.recordState,jdbcType=CHAR},
+      productState = #{record.productState,jdbcType=CHAR},
+      moneystate = #{record.moneystate,jdbcType=CHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.WholesaleReturnRec" >
+    update wholesalereturnrec
+    <set >
+      <if test="adminCode != null" >
+        adminCode = #{adminCode,jdbcType=CHAR},
+      </if>
+      <if test="wholesaleItemCode != null" >
+        wholesaleItemCode = #{wholesaleItemCode,jdbcType=CHAR},
+      </if>
+      <if test="returnNum != null" >
+        returnNum = #{returnNum,jdbcType=INTEGER},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingCode != null" >
+        shippingCode = #{shippingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="recordState != null" >
+        recordState = #{recordState,jdbcType=CHAR},
+      </if>
+      <if test="productState != null" >
+        productState = #{productState,jdbcType=CHAR},
+      </if>
+      <if test="moneystate != null" >
+        moneystate = #{moneystate,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where returnRecNum = #{returnRecNum,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.WholesaleReturnRec" >
+    update wholesalereturnrec
+    set adminCode = #{adminCode,jdbcType=CHAR},
+      wholesaleItemCode = #{wholesaleItemCode,jdbcType=CHAR},
+      returnNum = #{returnNum,jdbcType=INTEGER},
+      reason = #{reason,jdbcType=VARCHAR},
+      shippingCode = #{shippingCode,jdbcType=VARCHAR},
+      recordState = #{recordState,jdbcType=CHAR},
+      productState = #{productState,jdbcType=CHAR},
+      moneystate = #{moneystate,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where returnRecNum = #{returnRecNum,jdbcType=BIGINT}
+  </update>
+</mapper>

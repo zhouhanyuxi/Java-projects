@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ncu.clothwholesale.mapper.OrderDayRecMapper" >
+  <resultMap id="BaseResultMap" type="com.ncu.clothwholesale.pojo.OrderDayRec" >
+    <id column="ordDayRecCode" property="ordDayRecCode" jdbcType="CHAR" />
+    <result column="year" property="year" jdbcType="CHAR" />
+    <result column="month" property="month" jdbcType="CHAR" />
+    <result column="day" property="day" jdbcType="CHAR" />
+    <result column="orderNum" property="orderNum" jdbcType="INTEGER" />
+    <result column="moneyNum" property="moneyNum" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ordDayRecCode, year, month, day, orderNum, moneyNum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ncu.clothwholesale.pojo.OrderDayRecExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orderdayrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderdayrec
+    where ordDayRecCode = #{ordDayRecCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from orderdayrec
+    where ordDayRecCode = #{ordDayRecCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ncu.clothwholesale.pojo.OrderDayRecExample" >
+    delete from orderdayrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ncu.clothwholesale.pojo.OrderDayRec" >
+    insert into orderdayrec (ordDayRecCode, year, month, 
+      day, orderNum, moneyNum
+      )
+    values (#{ordDayRecCode,jdbcType=CHAR}, #{year,jdbcType=CHAR}, #{month,jdbcType=CHAR}, 
+      #{day,jdbcType=CHAR}, #{orderNum,jdbcType=INTEGER}, #{moneyNum,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ncu.clothwholesale.pojo.OrderDayRec" >
+    insert into orderdayrec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ordDayRecCode != null" >
+        ordDayRecCode,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="orderNum != null" >
+        orderNum,
+      </if>
+      <if test="moneyNum != null" >
+        moneyNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ordDayRecCode != null" >
+        #{ordDayRecCode,jdbcType=CHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=CHAR},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=CHAR},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=CHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="moneyNum != null" >
+        #{moneyNum,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ncu.clothwholesale.pojo.OrderDayRecExample" resultType="java.lang.Integer" >
+    select count(*) from orderdayrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orderdayrec
+    <set >
+      <if test="record.ordDayRecCode != null" >
+        ordDayRecCode = #{record.ordDayRecCode,jdbcType=CHAR},
+      </if>
+      <if test="record.year != null" >
+        year = #{record.year,jdbcType=CHAR},
+      </if>
+      <if test="record.month != null" >
+        month = #{record.month,jdbcType=CHAR},
+      </if>
+      <if test="record.day != null" >
+        day = #{record.day,jdbcType=CHAR},
+      </if>
+      <if test="record.orderNum != null" >
+        orderNum = #{record.orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyNum != null" >
+        moneyNum = #{record.moneyNum,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orderdayrec
+    set ordDayRecCode = #{record.ordDayRecCode,jdbcType=CHAR},
+      year = #{record.year,jdbcType=CHAR},
+      month = #{record.month,jdbcType=CHAR},
+      day = #{record.day,jdbcType=CHAR},
+      orderNum = #{record.orderNum,jdbcType=INTEGER},
+      moneyNum = #{record.moneyNum,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncu.clothwholesale.pojo.OrderDayRec" >
+    update orderdayrec
+    <set >
+      <if test="year != null" >
+        year = #{year,jdbcType=CHAR},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=CHAR},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=CHAR},
+      </if>
+      <if test="orderNum != null" >
+        orderNum = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="moneyNum != null" >
+        moneyNum = #{moneyNum,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where ordDayRecCode = #{ordDayRecCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ncu.clothwholesale.pojo.OrderDayRec" >
+    update orderdayrec
+    set year = #{year,jdbcType=CHAR},
+      month = #{month,jdbcType=CHAR},
+      day = #{day,jdbcType=CHAR},
+      orderNum = #{orderNum,jdbcType=INTEGER},
+      moneyNum = #{moneyNum,jdbcType=DOUBLE}
+    where ordDayRecCode = #{ordDayRecCode,jdbcType=CHAR}
+  </update>
+
+  <select id="listByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap" >
+  	select * from orderdayrec  
+  	where 1= 1
+  	<if test="day != null and day !='' ">and ordYearRecCode like concat('%',#{day},'%') </if>
+	<if test="type =='CG' ">and ordDayRecCode like '%C%' </if>  
+	<if test="type =='PF' ">and ordDayRecCode like '%P%' </if>  
+ 	order by ordDayRecCode asc
+  </select>
+</mapper>

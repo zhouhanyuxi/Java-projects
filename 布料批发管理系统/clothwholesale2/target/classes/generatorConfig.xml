@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry  location="mysql-connector-java-5.1.25-bin.jar" />  
+    <context id="test" targetRuntime="MyBatis3">
+    	
+        <commentGenerator>
+            <!-- 这个元素用来去除指定生成的注释中是否包含生成的日期 false:表示保护 -->
+            <!-- 如果生成日期，会造成即使修改一个字段，整个实体类所有属性都会发生变化，不利于版本控制，所以设置为true -->
+            <property name="suppressDate" value="true" />
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="false" />
+        </commentGenerator>
+    	
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://localhost:3306/clothwholesale" userId="root" password="123456">
+            </jdbcConnection>
+        <javaTypeResolver>
+            <!-- This property is used to specify whether MyBatis Generator should 
+                force the use of java.math.BigDecimal for DECIMAL and NUMERIC fields, -->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="com.ncu.clothwholesale.pojo"
+            targetProject="src">
+        	<property name="constructorBased" value="false"/>
+        	<property name="immutable" value="false"/>
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置 -->
+        <sqlMapGenerator targetPackage="com.ncu.clothwholesale.mapping"
+            targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+            targetPackage="com.ncu.clothwholesale.mapper" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        
+        <!-- 要生成哪些表 -->
+        <table  tableName="supplier"   domainObjectName="Supplier" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="supplierCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="admin"   domainObjectName="Admin" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="adminCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="warehouse"   domainObjectName="Warehouse" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="warehouseCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="inventoryContent"   domainObjectName="InventoryContent" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="inventoryContInd"  sqlStatement="JDBC"   identity="true"/>
+      	</table>
+      	<table  tableName="product"   domainObjectName="Product" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="productCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="productModel"   domainObjectName="ProductModel" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="modelCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="picture"   domainObjectName="Picture" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="filename"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="sellPrice"   domainObjectName="SellPrice" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="sellPriceCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="purchaseOrder"   domainObjectName="PurchaseOrder" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="purchaseOrdCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="purchaseItem"   domainObjectName="PurchaseItem" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="purchaseItemCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="comMonIORecord"   domainObjectName="ComMonIORecord" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="comIORecCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="warehouseIORecord"   domainObjectName="WarehouseIORecord" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="warehouseIORecCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="customer"   domainObjectName="Customer" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="username"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="shippingAddress"   domainObjectName="ShippingAddr" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="shippingAddrNum"  sqlStatement="JDBC"   identity="true"/>
+      	</table>
+      	<table  tableName="listItem"   domainObjectName="ListItem" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="listItemCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="wholesaleOrder"   domainObjectName="WholesaleOrder" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="wholesaleOrdCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="wholesaleItem"   domainObjectName="WholesaleItem" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="wholesaleItemCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="wholesaleCancelRec"   domainObjectName="WholesaleCancelRec" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="cancelRecNum"  sqlStatement="JDBC"   identity="true"/>
+      	</table>
+      	<table  tableName="wholesaleReturnRec"   domainObjectName="WholesaleReturnRec" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="returnRecNum"  sqlStatement="JDBC"   identity="true"/>
+      	</table>
+      	<table  tableName="wholesaleExchangeRec"   domainObjectName="WholesaleExchangeRec" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="exchangeRecNum"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="cusMonIORec"   domainObjectName="CusMonIORec"  enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="cusMonIORecCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="saleDayRec"   domainObjectName="SaleDayRec"  enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="saleDayRecCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="orderDayRec"   domainObjectName="OrderDayRec"  enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="ordDayRecCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="orderMonRec"  domainObjectName="OrderMonRec" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased"  value="false"/>
+        	<property name="modelOnly"  value="false"/>
+        	<property name="useActualColumnNames"  value="true"/>
+         	<generatedKey  column="ordMonRecCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+      	<table  tableName="orderYearRec"   domainObjectName="OrderYearRec" enableCountByExample="false" enableUpdateByExample="false" 
+        		enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        	<property name="constructorBased" value="false"/>
+        	<property name="modelOnly" value="false"/>
+        	<property name="useActualColumnNames" value="true"/>
+         	<generatedKey  column="ordYearRecCode"  sqlStatement="JDBC"   identity="false"/>
+      	</table>
+
+
+    </context>
+</generatorConfiguration>
